@@ -17,7 +17,7 @@ In this codealong lesson, we'll create a new HTML form and connect it to a Sinat
 
 Think about how many forms you fill out online every day. Credit card payments, logins, registration forms, and even Google searches are all examples of forms. That's because forms are the most common way for users to pass data to a web application.
 
-Specifically in this codealong, we'll connect HTML forms to a Sinatra application by building a form that takes a user's name and favorite food and returns an interpolated string. For example, if the name were "Sam" whose favorite food is "Green Eggs and Ham," we will get an interpolated string of "My name is Sam, and I love Green Eggs and Ham."
+Specifically in this lab, we'll connect HTML forms to a Sinatra application by building a form that takes a user's name and favorite food and returns an interpolated string. For example, if the name were "Sam" whose favorite food is "Green Eggs and Ham," we will get an interpolated string of "My name is Sam, and I love Green Eggs and Ham."
 
 ## Instructions
 
@@ -27,11 +27,11 @@ Let's take a quick tour of the starter code. Open `app.rb`. The only route in ou
 
 ### Starting Your Application
 
-To start this Ruby web application, type `shotgun` in your terminal within the root of this lesson's directory. 
+To start this Ruby web application, type `shotgun -p $PORT -o $IP` in your terminal within the root of this lesson's directory. 
 
 ### The Favorite Foods Form
 
-Once your `shotgun` server is started, navigate to: [http://localhost:9393/food_form](http://127.0.0.1:9393/food_form).
+Once your `shotgun` server is started, go preview your app, and make sure you add `/food_form` to the end of the URL.
 
 You'll see a very basic HTML page. Your first task is to build a form on this page.
 
@@ -71,7 +71,7 @@ Put it all together and your HTML form will look like this:
 </form>
 ```
 
-Now if you run `shotgun` and go to the corresponding view (`localhost:9393/food_form`), you'll see your very basic form.
+Now if you run your `shotgun` command and go to the corresponding view (`/food_form`), you'll see your very basic form.
 
 ### Connecting the Form to your Sinatra App
 
@@ -138,15 +138,15 @@ So our input names will need to be `name` and `favorite food`
 
 ### Param I Am
 
-The data from the form comes nicely packaged up in the form of a hash called `params`. Let's set the return value of the post route to be params.to_s, and see what our form does now...
+The data from the form comes nicely packaged up in the form of a hash called `params`. Let's make our post route `puts` the `params`, and see what our form does now...
 
 ```
 post '/food' do
-    params.to_s
-  end
+  puts params
+end
 ```
 
-When you submit your form, you should now see the contents of `params` displayed as a hash in your browser like this:
+When you submit your form, you should now see the contents of `params` displayed in your command line like this:
 
 ```
 {"name"=>"Sam", "favorite_food"=>"Green Eggs and Ham"}
@@ -166,10 +166,8 @@ Here's the full post route and action in `app.rb`:
 
 ```
 post '/food' do
-  "My name is #{params[:name]}, and I love #{params[:favorite_food]}"
+  "My name is #{params[:name]}, and I love #{params[:favorite_food]}."
 end
 ```
 
 Submit the form and see what happens! If you've gotten this far you can successfully connect an HTML form to your Sinatra app, and can use the params hash to use and manipulate data from the user. 
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/sinatra-forms-params-readme-walkthrough'>HTML Forms and Params</a> on Learn.co and start learning to code for free.</p>
